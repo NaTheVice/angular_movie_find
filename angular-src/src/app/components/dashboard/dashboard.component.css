@@ -1,0 +1,109 @@
+.dashboard{
+    text-align: left;
+    background-color: #2F3238
+}
+#icons i{
+    margin-right: 10px;
+}
+
+.dashboard{
+    border-style: none;
+}
+
+
+.login-root{
+    width: 150px;
+    height: 40px;
+    color:green;
+    font-size: 15px;
+
+
+}
+
+#genre-movies{
+    float:left;
+    text-align: left;
+    margin-bottom: -10px;
+    vertical-align: middle;
+}
+
+#genre-movies img{
+    width: 92px;
+    
+}
+
+#genre-movie-title{
+    color: goldenrod;
+    font-size: 14px;
+}
+.left{
+    text-align: left;
+}
+
+#left{
+    text-align: left;
+}
+
+#left .col-md-2 .col-md-3{
+    text-align: left;
+}
+#hr1{
+    position:absolute;
+    border-top: 1px solid #eee !important;
+}
+
+#title-mg{
+    font-size: 0.8em;
+}
+
+.col-xs-10 {
+    width: 12%;
+    float: left;
+}
+
+@media (min-width: 768px) {
+.col-sm-10 {
+        width: 12%;
+        float: left;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-md-10 {
+        width: 12%;
+        float: left;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lg-10 {
+        width: 10%;
+        float: left;
+    }
+}
+
+@media (max-width: 420px) {
+    .col-xs-6 {
+        width: 50%;
+       
+    }
+    .search-nav #filters>li>a {
+    display: none;
+   
+}
+}
+
+.coverlist2 img{
+    height: 114px;
+}
+
+#mg{
+    text-align: left;
+    margin-top: -60px;
+    margin-bottom: 25px;
+}
+
+#mg-inside{
+    text-align: center;
+    margin-left: 20px;
+}

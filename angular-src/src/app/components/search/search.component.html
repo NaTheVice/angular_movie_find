@@ -1,0 +1,163 @@
+<div id="searchpage" class="page">
+	<div class="container"><!-- search section -->
+        
+        <!-- movie section -->
+       
+                <div class="col-md-2" id="filter-section">
+                    <!-- Filter -->
+                    <nav id="options" class="search-nav">
+                        <ul id="filters" class="option-set" data-option-key="filter">
+                            <li class="type-search">GENRE FILTER</li>
+                            <li><a (click)="getNewestMovies()"  id="new" data-option-value=".news">New this month</a></li>
+                            <li><a (click)="handleFilterClick('all')" >All Genres</a></li>
+                            <li><a (click)="handleFilterClick('28')" data-option-value=".action">Action</a></li>
+                            <li><a  (click)="handleFilterClick('53')" href="#filter" data-option-value=".drama">Thriller</a></li>
+                            <li><a  (click)="handleFilterClick('35')" href="#filter" data-option-value=".comedy">Comedy</a></li>
+                        </ul>
+                    </nav>
+
+                    <!-- End Filter -->
+                </div>
+                <div class="col-md-10" id="filmliste"><!--Filme liste-->
+                    
+                    
+                           <div class="col-lg-15 col-md-3 col-sm-4 col-xs-6 " id='proFilmSpalte' *ngFor="let movie of this.movieService.movies">
+                                <div  (click)="movieClicked('custom-modal-2', movie)"  class='cover coverlist'  >
+                                    <img class='img-rounded img-responsive center-block' [src]="'https://image.tmdb.org/t/p/w185/' + movie.poster_path" alt="movie.overview" onError="this.src='/assets/img/movies/full/no-found.jpg'">
+                                </div>
+                            </div>
+
+                    
+                        <div class="col-md-12" ><!--col für pager-->
+                            <div class="col-md-2"></div>
+                            <div *ngIf="this.movieService.totalPages.length>1" class="paginate paginate-dark wrapper">
+                                <!-- pager -->
+                                <ul *ngIf="this.movieService.pager.pages && this.movieService.pager.pages.length">
+                                    <li [ngClass]="{disabled:this.movieService.pager.currentPage === 1}">
+                                        <a (click)="this.movieService.setPage(1)">First</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:this.movieService.pager.currentPage === 1}">
+                                        <a (click)="this.movieService.setPage(this.movieService.pager.currentPage - 1)">Previous</a>
+                                    </li>
+                                    <li *ngFor="let page of this.movieService.pager.pages" [ngClass]="{active:this.movieService.pager.currentPage === page}">
+                                        <a (click)="this.movieService.setPage(page)">{{page}}</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:this.movieService.pager.currentPage === this.movieService.pager.totalPages}">
+                                        <a (click)="this.movieService.setPage(this.movieService.pager.currentPage + 1)">Next</a>
+                                    </li>
+                                    <li [ngClass]="{disabled:this.movieService.pager.currentPage === this.movieService.pager.totalPages}">
+                                        <a (click)="this.movieService.setPage(this.movieService.pager.totalPages)">Last</a>
+                                    </li>
+                                </ul>
+                             </div>
+                       
+                        </div><!--ende pager-->
+                </div><!--Ende filmliste-->    
+                
+             
+      
+
+
+            
+
+
+             <!-- favoritesnliste-->
+            <div class="row" *ngIf="favorites.length>0">
+                <div class="col-md-2"><br />
+                            <li class="type-search">YOUR LIST</li>
+                </div>
+           
+                <div class="col-md-10" >
+                        <br />
+                        <div *ngFor="let movie of favorites">
+                           <div key={i} class='col-md-1'>
+
+                                        <div id='listcover' class='cover listcover'>
+                                        <img class='img-rounded img-responsive ' alt='Filmcover' [src]="'https://image.tmdb.org/t/p/w92/' + movie.poster_path" alt="movie.overview" onError="this.src='/assets/img/movies/full/no-found.jpg'">
+                                        </div>
+                                        
+                             </div> 
+                        </div>                  
+        
+            
+                <div class='col-md-12 file paginate paginate-dark wrapper'>
+                    <a download="mymovielist.txt" id="downloadlink" class='hidden'>Download list</a>
+                    <br />
+                    <li> 
+                    <a (click)="saveFavoritesAsText()" id="createfile" class="paginate paginate-dark wrapper" >Create file</a> 
+                    </li>
+                    <br />
+                    
+                </div>
+            </div>
+            </div><!--ende row für favorites-->
+
+
+                            <!-- BEISPIEL-LAYOUT
+                            <div class="col-md-2">
+							
+                        	<li class="item-thumbs span3 design">
+                            	
+                            	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Star-Wars 99" href="/assets/img/movies/full/image-02-full.jpg">
+                                	<span class="overlay-img"></span>
+                                    <span class="overlay-img-thumb font-icon-plus"></span>
+                                </a>
+                                
+                                <img src="/assets/img/movies/thumbs/image-02.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                            </li>
+                        	
+                            </div>
+                             -->            
+           
+        </div><!-- End search section-->
+
+
+        
+            
+    
+</div><!-- ende Page -->
+
+<!-- Modal -->
+<modal id="custom-modal-2" >
+        <div class="modal">
+            <div class="modal-body">
+                <div  *ngIf="selectedMovie" class="container centered" id="detailView">
+                    <div id='ersteSpalte' class='col-md-4'>
+                        <div class='details'>
+                        <h4>Story:</h4>
+                        <h6>Title: {{selectedMovie.overview}}</h6>  
+                        </div>
+                    </div>
+                    
+                    <div id='zweiteSpalte' class='col-md-4'>
+                        <img class='img-rounded img-responsive center-block' [src]="'https://image.tmdb.org/t/p/w300/' + selectedMovie.poster_path" alt="movie.overview" onError="this.src='/assets/img/movies/full/no-found.jpg'">
+                    </div>
+                    
+                    <div id='dritteSpalte' class='col-md-4'>
+                        <div class='details'>
+                            <br>
+                            <h4>Details:</h4>
+                            <h6>Title: {{selectedMovie.title}}</h6>
+                            <h6>Homepage: {{selectedMovie.homepage}}</h6>
+                            <div class="paginate paginate-dark wrapper">
+                                <li >
+                                    <a href="/#search">Back</a>
+                                </li>
+                                <li>
+                                    <a (click)="addMovieToFavorites(selectedMovie)">Add to list</a>
+                                </li>
+                                <li>
+                                    <a (click)="sendMovieToDb(selectedMovie)">Add to DB</a>
+                                </li>
+                            </div>
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                   
+                </div><!--container ende-->
+            
+            </div><!--modal body ende-->
+        </div>
+        <div class="modal-background"></div>
+    </modal>

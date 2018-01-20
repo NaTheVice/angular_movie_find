@@ -1,0 +1,61 @@
+#my-movies {
+    margin-bottom: 20px;
+    margin-top:30px;
+}
+
+.type-search{
+    list-style: none;
+}
+
+#movie-table{
+    text-align: left;
+}
+
+#table-headlines {
+    color: white;
+}
+
+.favpage{
+    padding-top: 80px;
+    background: #2F3238;
+	padding: 10px 0;
+}
+
+.not-watched{
+    color:red;
+    font-size: 11px;
+}
+
+.watched{
+    color:green;
+    font-size: 11px;
+}
+
+.col-md-3 b{
+    color: goldenrod;
+}
+
+#watched{
+   float:left;
+}
+#watched2{
+   float:left;
+   margin-left: 6px;
+   margin-top: -8px;
+}
+
+#lefty{
+    float: left;
+}
+#lefty2{
+    float: left;
+    margin-left:5px;
+}
+
+.cover2 img{
+    width: 92px;
+    filter: gray;
+    -webkit-filter: grayscale(0.8);
+    box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+    margin-bottom: 20px;
+}

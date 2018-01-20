@@ -1,0 +1,129 @@
+
+ <app-nav></app-nav>
+<div class="container">
+  
+    <h2 class="page-header left">Dashboard</h2>
+
+    <p class="left"><b>All User</b></p>
+    <hr>
+    <div class="row" id="left">
+        <div class="col-md-3">User ID</div>
+        <div class="col-md-1">Name</div>
+        <div class="col-md-2">Username</div>
+        <div class="col-md-3">E-Mail</div>
+        <div class="col-md-1">Movies</div>
+    </div>
+    <div class="row" id="left" *ngFor="let user of userList">
+        <div class="col-md-3" id="left">{{user._id}}</div>
+        <div class="col-md-1" id="left"><input  id="left" type="text" [ngClass]="'dashboard' +' '+ user.username" value={{user.name}} disabled="true"></div>
+        <div class="col-md-2" id="left"><input  id="left" type="text" [ngClass]="'dashboard' +' '+ user.username" value={{user.username}} disabled="true"></div>
+        <div class="col-md-3" id="left"><input  id="left" type="text" [ngClass]="'dashboard' +' '+ user.username" value={{user.email}} disabled="true"></div>
+        <div class="col-md-1" id="left">{{user.movies.length}} </div>
+        <div class="col-md-2" id="icons">  
+            
+            <a (click)="deleteUser(user)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+            <a (click)="makeEditable(user.username)"><i  class="fa fa-pencil" aria-hidden="true"></i></a>
+            <a (click)="updateUser(user)"><i class="fa fa-floppy-o" aria-hidden="true"></i></a>
+        </div>
+       
+    </div>
+    <br>
+    
+    <div id="left"><b>All Genres</b></div>
+   <hr>
+    <div *ngIf=genresReady class="col-md-12" id="pie-chart-genre">
+        <div class="col-md-8">
+            <ngx-charts-pie-chart
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="allUserGenres"
+            [legend]="showLegend"
+            [explodeSlices]="explodeSlices"
+            [labels]="showLabels"
+            [doughnut]="doughnut"
+            [gradient]="gradient"
+            (select)="onSelect($event)">
+            </ngx-charts-pie-chart>
+        </div>
+        <div class="col-md-4"><br><b>Top 6 Genres</b>
+           <ngx-charts-number-card
+                    *ngIf="top10Ready"
+                    class="chart-container"
+                    [view]="view3"
+                    (legendLabelClick)="onLegendLabelClick($event)"
+                    [scheme]="colorScheme"
+                    cardColor="#232837"
+                    emptyColor="#1e222e"
+                    [results]="top10Genres"
+                    (select)="onSelect($event)">
+            </ngx-charts-number-card>
+        </div>
+        <div id="mg" class="col-md-12"><br><p>Movies by <b>Genre: {{selectedGenre}}</b></p>    
+            <div  id="mg-inside" *ngIf="moviesByGenre.length>0">
+                    <div class="col-lg-10 col-md-3 col-sm-4 col-xs-6 " *ngFor="let movie of moviesByGenre" id="genre-movies">
+                                <div id="image-genre-movies" class='cover coverlist2'> 
+                                    <img (click)="movieClicked('custom-modal-2', movie)" class="img-rounded img-responsive center-block" [src]="'https://image.tmdb.org/t/p/w92/' + movie.poster_path" onError="this.src='/assets/img/movies/full/no-found.jpg'">       
+                                </div>
+                    </div>
+            </div>
+        </div>        
+    </div>
+    <br>
+    <br>
+    <br>
+    <div id="left"><b>All Rates</b></div>
+   <hr>
+    <div *ngIf=ratesReady class="col-md-12" id="pie-chart-rates">
+                <ngx-charts-advanced-pie-chart
+                [view]="view2"
+                [scheme]="colorScheme"
+                [results]="bestRated"
+                [gradient]="gradient"
+                (select)="onSelect2($event)">
+                </ngx-charts-advanced-pie-chart>
+    </div>
+    
+
+</div>   
+
+<!-- Modal -->
+<modal id="custom-modal-2" >
+        <div class="modal">
+            <div class="modal-body">
+                <div  *ngIf="selectedMovie" class="container centered" id="detailView">
+                    <div id='ersteSpalte' class='col-md-4'>
+                        <div class='details'>
+                        <h4>Story:</h4>
+                        <h6>Title: {{selectedMovie.overview}}</h6>  
+                        </div>
+                    </div>
+                    
+                    <div id='zweiteSpalte' class='col-md-4'>
+                        <img class='img-rounded img-responsive center-block' [src]="'https://image.tmdb.org/t/p/w300/' + selectedMovie.poster_path" alt="movie.overview" onError="this.src='/assets/img/movies/full/no-found.jpg'">
+                    </div>
+                    
+                    <div id='dritteSpalte' class='col-md-4'>
+                        <div class='details'>
+                            <br>
+                            <h4>Details:</h4>
+                            <h6>Title: {{selectedMovie.title}}</h6>
+                            <h6>Homepage: {{selectedMovie.homepage}}</h6>
+                            <div class="paginate paginate-dark wrapper">
+                                <li >
+                                    <a (click)= "closeModal('custom-modal-2')">Back</a>
+                                </li>
+                             
+                            </div>
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                   
+                </div><!--container ende-->
+            
+            </div><!--modal body ende-->
+        </div>
+        <div class="modal-background"></div>
+    </modal>
+
+

@@ -1,0 +1,33 @@
+#search-nav{
+ 
+    max-width: 300px;
+    margin-top:8.5px;
+   
+}
+
+#search-nav .input-group{
+ float: right;   
+}
+.col-md-8{
+    margin:0;
+    padding: 0;
+}
+
+.col-md-10{
+    margin:0;
+    padding:0;
+
+}
+
+div#navbar.collapse.navbar-collapse{
+    margin:0;
+    padding: 0;
+}
+
+.navbar-toggle .icon-bar{
+    background: ghostwhite;
+}
+
+
+
+

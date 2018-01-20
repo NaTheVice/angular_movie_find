@@ -1,0 +1,109 @@
+<h3 id="rated-header">Best Rated Movies in your List:</h3>
+<div class="charts" style="display: block">
+    <div id="prim-chart" *ngIf="rated[0]">
+        
+        <p class="prim-rating" >{{rated[0].vote_average}}</p>
+        <canvas  baseChart
+                [data]="[rated[0].vote_average, 10 - rated[0].vote_average]"
+                [labels]="doughnutChartLabels"
+                [colors]="doughnutChartColor"
+                [options]="doughnutOptions"
+                [chartType]="doughnutChartType"
+        ></canvas>
+        
+    </div>
+    <div class="prim-movie-info" *ngIf="rated[0]">
+        <p >{{rated[0].title}}</p>
+        <img class="img-rounded img-responsive" [src]="'https://image.tmdb.org/t/p/w154/' + rated[0].poster_path" onError="this.src='/assets/img/movies/full/no-found.jpg'">
+    </div>
+
+    <div id="min-charts">
+        <div class="min-chart-container" *ngIf="rated[1]">
+            <div id="min-chart">
+                <p class="min-rating" >{{rated[1].vote_average}}</p>
+                <canvas baseChart
+                        [data]="[rated[1].vote_average, 10 - rated[1].vote_average]"
+                        [labels]="doughnutChartLabels"
+                        [colors]="doughnutChartColor"
+                        [options]="doughnutOptions"
+                        [chartType]="doughnutChartType"
+                ></canvas>
+            </div>
+            <div class="min-movie-info">
+                <p >{{rated[1].title}}</p>
+                <img class="img-rounded img-responsive" [src]="'https://image.tmdb.org/t/p/w92/' + rated[1].poster_path" onError="this.src='/assets/img/movies/full/no-found.jpg'">
+            </div>
+        </div>
+
+        <div class="min-chart-container" *ngIf="rated[2]">
+            <div id="min-chart">
+                <p class="min-rating" >{{rated[2].vote_average}}</p>
+                <canvas baseChart
+                        [data]="[rated[2].vote_average, 10 - rated[2].vote_average]"
+                        [labels]="doughnutChartLabels"
+                        [colors]="doughnutChartColor"
+                        [options]="doughnutOptions"
+                        [chartType]="doughnutChartType"
+                ></canvas>
+            </div>
+            <div class="min-movie-info">
+                <p >{{rated[2].title}}</p>
+                <img class="img-rounded img-responsive" [src]="'https://image.tmdb.org/t/p/w92/' + rated[2].poster_path" onError="this.src='/assets/img/movies/full/no-found.jpg'">
+            </div>
+        </div>
+
+        <div class="min-chart-container" *ngIf="rated[3]">
+            <div id="min-chart">
+                <p class="min-rating" >{{rated[3].vote_average}}</p>
+                <canvas baseChart
+                        [data]="[rated[3].vote_average, 10 - rated[3].vote_average]"
+                        [labels]="doughnutChartLabels"
+                        [colors]="doughnutChartColor"
+                        [options]="doughnutOptions"
+                        [chartType]="doughnutChartType"
+                ></canvas>
+            </div>
+            <div class="min-movie-info">
+                <p >{{rated[3].title}}</p>
+                <img class="img-rounded img-responsive" [src]="'https://image.tmdb.org/t/p/w92/' + rated[3].poster_path" onError="this.src='/assets/img/movies/full/no-found.jpg'">
+            </div>
+        </div>
+
+        <div class="min-chart-container" *ngIf="rated[4]">
+            <div id="min-chart">
+                <p class="min-rating" >{{rated[4].vote_average}}</p>
+                <canvas baseChart
+                        [data]="[rated[4].vote_average, 10 - rated[4].vote_average]"
+                        [labels]="doughnutChartLabels"
+                        [colors]="doughnutChartColor"
+                        [options]="doughnutOptions"
+                        [chartType]="doughnutChartType"
+                ></canvas>
+            </div>
+            <div class="min-movie-info">
+                <p >{{rated[4].title}}</p>
+                <img class="img-rounded img-responsive" [src]="'https://image.tmdb.org/t/p/w92/' + rated[4].poster_path" onError="this.src='/assets/img/movies/full/no-found.jpg'">
+            </div>
+        </div>
+
+        <div class="min-chart-container" *ngIf="rated[5]">
+            <div id="min-chart" >
+                <p class="min-rating">{{rated[5].vote_average}}</p>
+                <canvas baseChart
+                        [data]="[rated[5].vote_average, 10 - rated[5].vote_average]"
+                        [labels]="doughnutChartLabels"
+                        [colors]="doughnutChartColor"
+                        [options]="doughnutOptions"
+                        [chartType]="doughnutChartType"
+                ></canvas>
+            </div>
+            <div class="min-movie-info">
+                <p >{{rated[5].title}}</p>
+                <img class="img-rounded img-responsive" [src]="'https://image.tmdb.org/t/p/w92/' + rated[5].poster_path" onError="this.src='/assets/img/movies/full/no-found.jpg'">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--(chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"-->

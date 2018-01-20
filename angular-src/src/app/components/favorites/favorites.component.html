@@ -1,0 +1,30 @@
+<div class="favpage" id="favpage">
+  <div class="container">
+  <div class="row" *ngIf="dbList.length>0">
+                      <div class="col-md-2">
+                      <li  class="type-search">MY MOVIES</li>
+                      </div>
+      <div class="col-md-10" id="movie-table">
+          <div class="row" id="table-headlines">
+              <div class="col-md-3">Title</div>
+              <div class="col-md-5">Overview</div>
+              <div class="col-md-2">Release Date</div>
+              <div class="col-md-2">Poster</div>
+          </div>
+          <div id="my-movies" class="row" *ngFor="let movie of dbList | sort:'addedAt'">
+              <div class="col-md-3"><b>{{movie.title}}</b> <br><br>addet:<br>{{movie.addedAt | date:'medium' }}</div>
+              <div class="col-md-5">{{movie.overview}}</div>
+              <div class="col-md-2">{{movie.release_date}}</div> 
+              <div class="col-md-2 cover2" id="watched" >
+                <img id="lefty" class="img-rounded img-responsive" [src]="'https://image.tmdb.org/t/p/w92/' + movie.poster_path" onError="this.src='/assets/img/movies/full/no-found.jpg'">
+                <div id="watched2" (click)="deleteMovieFromDb(movie.id)">X</div>
+                
+                <div id="watched"><input type="checkbox" id="lefty" [checked]= movie.watched (change)= updateMovie(movie) /><p id="lefty2" class="not-watched" *ngIf="!movie.watched, else other">unwatched</p></div>
+                <ng-template #other><p id="lefty2" class="watched">watched</p></ng-template>
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>
+</div>
+

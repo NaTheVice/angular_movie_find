@@ -1,0 +1,155 @@
+#user-info{
+    text-align: left;
+    margin-top: 40px;
+}
+
+#user-img{
+    width:100px;
+    height:100px;
+    background: goldenrod;
+    color: white;
+    border-radius: 50%;
+    font-size: 4.6em;
+    text-align: center;
+    position: relative;
+    float:left;
+    margin-right: 20px;
+}
+
+#user-img p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+}
+
+.user-name{
+    display: block;
+    color: white;
+}
+
+.user-name a{
+    float:right;
+    margin: 0 5px;
+}
+
+.user-name span{
+    font-size: 1.7em;
+}
+
+#line{
+    border-top: 1px solid white;
+    margin: 5px 0;
+}
+
+#genres{
+    color:white;
+    font-size: 0.8em;
+    height:40px;
+    width: 100%;
+    background: lightgray;
+    text-align: center;
+}
+
+#genres p {
+    float:left;
+    z-index: 300;
+}
+
+#genrepercent, #watchedpercent, #ratingpercent{
+    height:40px;
+    background: goldenrod;
+    width:0%;
+    -webkit-transition: all ease 1.5s;
+    -moz-transition: all ease 1.5s;
+    transition: all ease 1.5s;
+}
+
+#percent-bar {
+    display: inline-block;
+}
+
+#percent-bar h3{
+    margin: 0px;
+    margin-bottom: 5px;
+    color:white;
+}
+
+#break{
+    clear:both;
+    display: block;
+    height:50px;
+    width: 100%;
+}
+
+#not-watched{
+    margin-top:30px;
+    color:white;
+}
+
+#not-watched h3{
+    margin-left:15px;
+}
+
+.dashboard{
+    text-align: left;
+    background-color: #2F3238;
+    border: none;
+}
+
+agm-map {
+      height: 300px;
+    }
+
+ 
+
+     #map {
+        height: 500px;
+      }
+      /* Optional: Makes the sample page fill the window. */
+   
+      .controls {
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 300px;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+      }
+
+      .pac-container {
+        font-family: Roboto;
+      }
+
+      #type-selector {
+        color: #fff;
+        background-color: #4d90fe;
+        padding: 5px 11px 0px 11px;
+      }
+
+      #type-selector label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+      #target {
+        width: 345px;
+      }
+  

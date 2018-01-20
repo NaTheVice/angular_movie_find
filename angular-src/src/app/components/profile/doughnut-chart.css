@@ -1,0 +1,79 @@
+#rated-header{
+    color:white;
+}
+
+#prim-chart{
+    margin-top:10px;
+    margin-bottom: 20px;
+    display: inline-block;
+    position: relative;
+    width:250px;
+}
+
+#min-charts{
+    position: relative;
+}
+
+
+#min-chart{
+    position:absolute;
+    width:100px;
+    top:50%;
+    transform: translateY(-50%);
+}
+
+.min-chart-container{
+    float:left;
+    position: relative;
+    width:220px;
+    height:200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.charts{
+    position: relative;
+}
+
+.prim-rating, .min-rating{
+    position: absolute;
+    top:50%;
+    left:50%;
+    color:white;
+    transform: translate(-50%,-35%);
+}
+
+.prim-rating{
+    font-size: 2.5em;
+}
+
+.min-rating{
+    font-size: 1em;
+}
+
+.prim-movie-info{
+    margin-left:20px;
+    position: absolute;
+    top: 0px;
+    display: inline-block;
+}
+
+.prim-movie-info p {
+     margin-bottom: 5px;
+     color: white;
+}
+
+.min-movie-info{
+    position: absolute;
+    left:50%;
+}
+
+.min-movie-info p {
+    height: 35px;
+    width:150px;
+    overflow-x: visible;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    line-height: 1.0em;
+}
+

@@ -1,0 +1,53 @@
+    <nav id="menu" class="navbar">
+        <div class="container" id="nav-container">
+            <div class="col-md-2" id="nvbar-head">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" id="logo" href="#">MOVIEMASTER</a>
+            </div>
+            </div>
+            <div class="col-md-10">  
+               
+                    <div id="navbar" class="collapse navbar-collapse">
+                         <div class="col-md-8">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a  [routerLink]="['/']" (click)="gotoHashtag('home-slider')" fragment="home-slider">HOME</a></li>
+                        <li><a  [routerLink]="['/']" (click)="gotoHashtag('searchpage')" fragment="searchpage" >SEARCH</a></li>
+                        <li *ngIf="loggedIn"><a  [routerLink]="['/profile']">PROFILE</a></li>
+                        <li *ngIf="loggedIn"><a  [routerLink]="['/']" (click)="gotoHashtag('favpage')" fragment="favpage">MY MOVIES</a></li>
+                        <li><a  [routerLink]="['/']" (click)="gotoHashtag('contact')" fragment="contact" >CONTACT</a></li>
+                        <li *ngIf="!loggedIn"><a [routerLink]="['/login']">LOGIN</a></li>
+                        <li *ngIf="!loggedIn"><a [routerLink]="['/register']">REGISTER</a></li>
+                        <li *ngIf="loggedIn"><a (click)="onLogoutClick()" >LOGOUT</a></li>
+                    </ul>
+
+                      </div>                             
+                    <div class="col-md-4 right" id="search-nav">
+                        <div class="input-group">
+                            <input  [(ngModel)]="this.movieService.searchstring" type="text" class="form-control" placeholder="type movie name" name="q">
+                            <div class="input-group-btn">
+                                <a  [routerLink]="['/']" fragment="searchpage"><button (click)="this.movieService.getData()" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button></a>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+            </div><!--/.nav-collapse -->
+
+            
+        </div>
+       
+        
+    </nav>
+
+    <div class="messageholder">
+     <flash-messages></flash-messages>
+    </div>
+
+
+   
