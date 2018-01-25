@@ -24,7 +24,7 @@ loggedIn: boolean;
     private authService:AuthService,
     private router:Router,
     private flashMessage:FlashMessagesService,
-    private movieService: MovieService,
+    public movieService: MovieService,
     private route:ActivatedRoute) { 
       
     }
@@ -70,7 +70,6 @@ loggedIn: boolean;
     });
     this.loggedIn = this.authService.loggedIn();
     this.router.navigate(['/']);
-
     return false;
   }
 

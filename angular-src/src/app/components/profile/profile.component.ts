@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   public searchControl: FormControl;
   public zoom: number;
 
-  private searchstring :string = "";
+  public searchstring :string = "";
 
   private alive: boolean = true;
   private subscription: ISubscription;

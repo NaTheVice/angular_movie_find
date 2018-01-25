@@ -24,21 +24,25 @@ export class SearchComponent implements OnInit, OnDestroy {
  
   //jsonex={"vote_count":5780,"id":11,"video":false,"vote_average":8,"title":"Star Wars","popularity":8.923744,"poster_path":"\/tvSlBzAdRE29bZe5yYWrJ2ds137.jpg","original_language":"en","original_title":"Star Wars","genre_ids":[12,28,878],"backdrop_path":"\/4iJfYYoQzZcONB9hNzg0J0wWyPH.jpg","adult":false,"overview":"Princess Leia is captured and held hostage by the evil Imperial forces in their effort to take over the galactic Empire. Venturesome Luke Skywalker and dashing captain Han Solo team together with the loveable robot duo R2-D2 and C-3PO to rescue the beautiful princess and restore peace and justice in the Empire.","release_date":"1977-05-25"};
   newsShow;
+
   favorites = [];
   selectedMovie =null;
   private subscription: ISubscription;
   private alive: boolean = true;
+  guestmode;
+ 
 
   constructor(private tmdbSearch: TmdbSearch, 
-              private AuthService: AuthService, 
+              private authService: AuthService, 
               private HttpService: Http,
               private pagerService: PagerService,
               private modalService: ModalService,
-              private movieService: MovieService,
+              public movieService: MovieService,
               private userService: UserService) 
               {
 
                 this.movieService.news.takeWhile(() => this.alive).subscribe(news => this.newsShow);
+                this.authService.isLoggedIn.subscribe(status => {this.guestmode = !status});
    }
 
   ngOnDestroy() {
@@ -48,14 +52,14 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+  
     if(!this.movieService.searchstring)
     this.getNewestMovies(); 
+    
   }
 
-  handleFilterClick(genre){
-    
+  handleFilterClick(genre){ 
     this.movieService.setGenre(genre);
-
   }
 
   movieClicked(id: string, movie){

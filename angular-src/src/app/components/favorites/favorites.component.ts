@@ -19,19 +19,22 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   
   dbList: Array<any> =[];
   private alive: boolean = true;
+  login;
 
   constructor(private authService:AuthService,
               private movieService: MovieService,
-              private userService:UserService) { }
+              private userService:UserService) {       
+              }
 
 
   ngOnDestroy() {
-  //this.subscription.unsubscribe();
   this.alive = false;
   }
   ngOnInit() {
     this.movieService.dbList.takeWhile(() => this.alive).subscribe(movies => this.dbList = movies);
     this.movieService.getFavorites();
+    this.authService.isLoggedIn.subscribe(status => {this.login = status});
+   
   }
 
   deleteMovieFromDb(id){

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import {TmdbSearch} from './tmdbSearch';
 import {AuthService} from './auth.service';
 import {Router} from '@angular/router';
@@ -9,7 +9,6 @@ import { BehaviorSubject,  } from 'rxjs/BehaviorSubject';
 import {Http, Headers,Response} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {tokenNotExpired} from 'angular2-jwt';
-import { OnDestroy } from "@angular/core";
 import { ISubscription } from "rxjs/Subscription";
 import "rxjs/add/operator/takeWhile";
 
@@ -46,8 +45,6 @@ export class MovieService implements OnDestroy {
                 this.news = this.newsShow.asObservable();
                 this.getFavorites();
                 
-                
-
               }
 
  ngOnDestroy() {

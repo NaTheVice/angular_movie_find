@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.subscription = this.authService.authenticateUser(user).subscribe(data => {
       if(data.success){
         this.authService.storeUserData(data.token, data.user);
-        
+        this.authService.setUserSession(true);
         if(data.user.username == 'root'){
           this.router.navigate(['dashboard']);
         }

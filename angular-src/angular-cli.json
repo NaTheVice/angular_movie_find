@@ -22,8 +22,7 @@
         "./assets/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css",
         "./assets/css/supersized.css",
         "styles.css",
-        "../node_modules/@swimlane/ngx-charts/release/index.css",
-        "../node_modules/@swimlane/ngx-charts/release/pie-chart/pie-chart.component.css"
+        "../node_modules/@swimlane/ngx-charts/release/index.css"
       ],
       "scripts": [
         "./assets/js/jquery-3.2.1.min.js",

@@ -20,6 +20,7 @@ import { SearchComponent } from './components/search/search.component'
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
 import {FlashMessagesModule} from 'angular2-flash-messages';
+import {FlashMessagesService} from 'angular2-flash-messages';
 import {AuthGuard} from './guards/auth.guard';
 
 import { PagerService } from './services/pager.service';
@@ -82,7 +83,7 @@ const appRoutes: Routes =  [
     ChartsModule,
     
   ],
-  providers: [ValidateService, AuthService, AuthGuard, TmdbSearch, PagerService, ModalService, MovieService,UserService ] ,
+  providers: [ValidateService, AuthService, AuthGuard, TmdbSearch, PagerService, ModalService, MovieService,UserService, FlashMessagesService ] ,
   bootstrap: [AppComponent]
 })
 export class AppModule { }
