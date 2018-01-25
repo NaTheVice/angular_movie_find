@@ -2,30 +2,23 @@ import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {tokenNotExpired} from 'angular2-jwt';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Rx';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observer } from 'rxjs/Observer';
 
 @Injectable()
 export class AuthService {
   authToken: any;
   user: any;
   isDev:boolean;
-  isLoggedIn: Observable<boolean>;
-  private userSession: Observer<boolean>;
 
   constructor(private http:Http) {
     this.isDev = false; // Change to false before deployment
-    this.isLoggedIn = new Observable<boolean>(value => this.userSession = value).share();
-    
+
   }
 
   ngOninit(){
-     this.setUserSession(false);
+    
   }
-
   registerUser(user){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
@@ -53,14 +46,14 @@ export class AuthService {
       .map(res => res.json());
   }
 
-  storeUserData(token, user):void {
+  storeUserData(token, user){
     localStorage.setItem('id_token', token);
     localStorage.setItem('user', JSON.stringify(user));
     this.authToken = token;
     this.user = user;
   }
 
-  loadToken(): void{
+  loadToken(){
     const token = localStorage.getItem('id_token');
     console.log('load token')
     this.authToken = token;
@@ -68,14 +61,12 @@ export class AuthService {
 
   loggedIn(){
     return tokenNotExpired('id_token');
-     
   }
 
-  logout(): void{
+  logout(){
     this.authToken = null;
     this.user = null;
     localStorage.clear();
-    this.setUserSession(false);
   }
 
   prepEndpoint(ep){
@@ -84,11 +75,6 @@ export class AuthService {
     } else {
       return 'https://movie-master.herokuapp.com/'+ep;
     }
-  }
-
-  setUserSession(value:boolean){
-    
-    this.userSession.next(value);
   }
 
   
