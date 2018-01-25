@@ -52,7 +52,7 @@ export class UserService {
 
   
     prepEndpoint(ep){
-      return 'http://localhost:8080/'+ep;
+      return 'https://movie-master.herokuapp.com/'+ep;
     }
   
 
