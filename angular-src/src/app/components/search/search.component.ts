@@ -42,7 +42,7 @@ export class SearchComponent implements OnInit, OnDestroy {
               {
 
                 this.movieService.news.takeWhile(() => this.alive).subscribe(news => this.newsShow);
-                //this.authService.isLoggedIn.subscribe(status => {this.guestmode = !status});
+                this.authService.isLoggedIn.subscribe(status => {this.guestmode = !status; console.log("huhuhu " + status)});
    }
 
   ngOnDestroy() {
@@ -52,7 +52,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-  
+    
     if(!this.movieService.searchstring)
     this.getNewestMovies(); 
     

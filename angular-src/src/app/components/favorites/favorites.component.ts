@@ -19,7 +19,7 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   
   dbList: Array<any> =[];
   private alive: boolean = true;
-  login = false;
+  login;
 
   constructor(private authService:AuthService,
               private movieService: MovieService,
@@ -32,6 +32,7 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     this.movieService.dbList.takeWhile(() => this.alive).subscribe(movies => this.dbList = movies);
+    this.authService.isLoggedIn.subscribe(status => {this.login = status; console.log("hahaha " + status)});
     this.movieService.getFavorites();
     //this.authService.isLoggedIn.subscribe(status => {this.login = status});
    

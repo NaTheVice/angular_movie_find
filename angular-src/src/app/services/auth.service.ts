@@ -2,16 +2,23 @@ import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {tokenNotExpired} from 'angular2-jwt';
-import { Observable } from 'rxjs/Observable';
+
 import 'rxjs/add/operator/catch';
+import { Observer } from 'rxjs/Observer';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class AuthService {
   authToken: any;
   user: any;
   isDev:boolean;
+  isLoggedIn = new BehaviorSubject<boolean>(false);
+  userSession = this.isLoggedIn.asObservable();
+
 
   constructor(private http:Http) {
+    this.isLoggedIn.next(this.loggedIn());
     this.isDev = false; // Change to false before deployment
 
   }
@@ -19,6 +26,7 @@ export class AuthService {
   ngOninit(){
     
   }
+
   registerUser(user){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
@@ -67,14 +75,19 @@ export class AuthService {
     this.authToken = null;
     this.user = null;
     localStorage.clear();
+    this.setUserSession(false);
   }
 
   prepEndpoint(ep){
     if(this.isDev){
       return ep;
     } else {
-      return 'https://movie-master.herokuapp.com/'+ep;
+      return 'http://localhost:8080/'+ep;
     }
+  }
+
+  setUserSession(value: boolean){
+    this.isLoggedIn.next(value);
   }
 
   
