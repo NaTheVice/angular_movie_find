@@ -232,7 +232,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
 
   progress(){
-    console.log('in progress genrepercent value : ' + this.genrepercent);
+    
     let percent = document.getElementById("percent-bar");
     let genre = document.getElementById("genrepercent");
     let rating = document.getElementById("ratingpercent");
@@ -340,7 +340,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
       var geocoder =  new google.maps.Geocoder();
       geocoder.geocode( { 'address': this.searchstring}, (results, status) => {
             if (status == google.maps.GeocoderStatus.OK) {
-            console.log('hallllooooo geocoder' + results[0].geometry.location.lat() +'  '+ results[0].geometry.location.lng())
+            
              this.latitude = results[0].geometry.location.lat(); 
              this.longitude=  results[0].geometry.location.lng(); 
              this.setMap2();
