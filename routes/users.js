@@ -61,7 +61,6 @@ router.post('/authenticate', (req, res, next) => {
 
 // Profile wird abgesichert durch passport authentifizierung mit jwt wegen um festgelegte JWTstrategy zu verwenden
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-  console.log('User get profile: ' + req.user.email);
   res.json({user: req.user});
 });
 

@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
+
 import {tokenNotExpired} from 'angular2-jwt';
 
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/of';
+
 import { Observer } from 'rxjs/Observer';
-import { Observable } from 'rxjs/Observable';
+
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
@@ -15,12 +19,11 @@ export class AuthService {
   isDev:boolean;
   isLoggedIn = new BehaviorSubject<boolean>(false);
   userSession = this.isLoggedIn.asObservable();
-
+  //xx: Observable<boolean> = Observable.of(true);
 
   constructor(private http:Http) {
     this.isLoggedIn.next(this.loggedIn());
     this.isDev = false; // Change to false before deployment
-
   }
 
   ngOninit(){
