@@ -58,6 +58,13 @@ export class ProfileComponent implements OnInit,OnDestroy {
               private mapsAPILoader: MapsAPILoader,
               private ngZone: NgZone) { 
 
+                
+                this.subscription = this.movieService.dbList.subscribe(movies => {
+                  this.movies = movies;
+                  this.movieCount = this.movies.length;
+                  this.initializeMovieData();
+                });
+                
                 if(!this.user){
                   this.authService.getProfile().takeWhile(() => this.alive).subscribe(profile => {
                     this.firstChar = profile.user.name.charAt(0).toUpperCase();
@@ -76,11 +83,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.movieService.dbList.subscribe(movies => {
-      this.movies = movies;
-      this.movieCount = this.movies.length;
-      this.initializeMovieData();
-    }); 
+     
     this.setCurrentPosition();
   
     

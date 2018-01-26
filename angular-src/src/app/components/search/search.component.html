@@ -41,7 +41,7 @@
             </div>
 
 
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <!--col für pager-->
                 <div class="col-md-2"></div>
                 <div *ngIf="this.movieService.totalPages.length>1" class="paginate paginate-dark wrapper">
@@ -75,15 +75,15 @@
 
         <!-- favoritesnliste-->
         <div class="row" *ngIf="favorites.length>0 && guestmode">
-            <div class="col-md-2">
+            <div class="col-md-2 col-xs-12">
                 <br />
                 <li class="type-search">YOUR LIST</li>
             </div>
 
-            <div class="col-md-10">
+            <div class="col-md-10 col-xs-12">
                 <br />
                 <div *ngFor="let movie of favorites">
-                    <div key={i} class='col-md-1'>
+                    <div key={i} class='col-md-2 col-xs-3'>
 
                         <div id='listcover' class='cover listcover'>
                             <img class='img-rounded img-responsive ' alt='Filmcover' [src]="'https://image.tmdb.org/t/p/w92/' + movie.poster_path" alt="movie.overview"
@@ -94,7 +94,7 @@
                 </div>
 
 
-                <div class='col-md-12 file paginate paginate-dark wrapper' >
+                <div class='col-md-12 col-xs-12 file paginate paginate-dark wrapper' >
                     <a download="mymovielist.txt" id="downloadlink" class='hidden'>Download list</a>
                     <br />
                     <li>
@@ -138,10 +138,11 @@
                             <li>
                                 <a href="/#search">Back</a>
                             </li>
-                            <li>
+                            
+                            <li *ngIf="guestmode">
                                 <a (click)="addMovieToFavorites(selectedMovie)">Add to list</a>
                             </li>
-                            <li>
+                            <li *ngIf="!guestmode">
                                 <a (click)="sendMovieToDb(selectedMovie)">Add to DB</a>
                             </li>
                         </div>

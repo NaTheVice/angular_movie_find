@@ -189,6 +189,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     this.top10Genres = orderedArray.slice(0,6);
     this.top10Ready=true;
+    this.setMoviesByGenre(orderedArray[0].id);
+    this.selectedGenre = orderedArray[0].name;
   }
 
 
@@ -207,9 +209,6 @@ setMoviesByGenre(genre){
 
     }
 }
-
-
-  
 
  onSelect(event) {
    

@@ -62,6 +62,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   movieClicked(id: string, movie){
+    console.log("click receive")
+
     this.selectMovie(movie);
     this.openModal(id);
   }
