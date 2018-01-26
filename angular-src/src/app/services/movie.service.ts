@@ -43,6 +43,7 @@ export class MovieService implements OnDestroy {
                 this.dbList = new BehaviorSubject<Array<any>>([]);
                 this.newsShow = new Subject<boolean>();
                 this.news = this.newsShow.asObservable();
+
                 this.getFavorites();
                 
               }
@@ -149,18 +150,22 @@ getData(){
   }
 
   getFavorites(){
+    
     console.log('get userFavorites')
-    let headers = new Headers();
-    const token = localStorage.getItem('id_token');
-    headers.append('Authorization', token);
-    headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('users/userFavorites');
-    this.HttpService.get(ep,{headers: headers})
-    .map(res => {return res.json()})
-    .takeWhile(() => this.alive)
-    .subscribe(movies => {this.dbList.next(movies)},
-    (err => console.error("load movieslist error"))
-    );
+
+    if(this.AuthService.loggedIn()){
+      let headers = new Headers();
+      const token = localStorage.getItem('id_token');
+      headers.append('Authorization', token);
+      headers.append('Content-Type','application/json');
+      let ep = this.prepEndpoint('users/userFavorites');
+      this.HttpService.get(ep,{headers: headers})
+      .map(res => {return res.json()})
+      .takeWhile(() => this.alive)
+      .subscribe(movies => {this.dbList.next(movies)},
+      (err => console.error("load movieslist error"))
+      );
+    }
    
   }
 
