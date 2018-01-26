@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
               private ngZone: NgZone) { 
 
                 if(!this.user){
-                  this.authService.getProfile().subscribe(profile => {
+                  this.authService.getProfile().takeWhile(() => this.alive).subscribe(profile => {
                     this.firstChar = profile.user.name.charAt(0).toUpperCase();
                     this.user = profile.user;
                   });

@@ -42,11 +42,10 @@ export class SearchComponent implements OnInit, OnDestroy {
               {
 
                 this.movieService.news.takeWhile(() => this.alive).subscribe(news => this.newsShow);
-                this.authService.isLoggedIn.subscribe(status => {this.guestmode = !status; console.log("huhuhu " + status)});
+                this.authService.isLoggedIn.takeWhile(() => this.alive).subscribe(status => {this.guestmode = !status});
    }
 
   ngOnDestroy() {
-  //this.subscription.unsubscribe();
       this.alive = false;
 
   }

@@ -61,9 +61,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
               private modalService: ModalService ) {
                 
                   this.setUserList();
-                  
-                  //Object.assign(this, {single, multi})
-                  //this.single=this.allUserGenres;
+             
               }
 
   ngOnDestroy() {
@@ -90,7 +88,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.userService.getUserList().takeWhile(() => this.alive).subscribe(userList => {
       this.userList = userList;
       this.setAllUserMovies();
-      //this.setAllAdded();
     },
     err => {
       console.log(err);
