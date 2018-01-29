@@ -83,7 +83,7 @@ export class AuthService {
 
   prepEndpoint(ep){
     if(this.isDev){
-      return ep;
+      return 'http://localhost:8080/'+ep;
     } else {
       return 'https://movie-master.herokuapp.com/'+ep;
     }

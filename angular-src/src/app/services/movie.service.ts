@@ -16,7 +16,7 @@ import "rxjs/add/operator/takeWhile";
 
 @Injectable()
 export class MovieService implements OnDestroy {
-
+    isDev:boolean;
     searchstring = '';
     newsShow;
     news;
@@ -39,11 +39,11 @@ export class MovieService implements OnDestroy {
               private pagerService: PagerService,
               private router:Router) 
               {
-                
+                this.isDev = false;
                 this.dbList = new BehaviorSubject<Array<any>>([]);
                 this.newsShow = new Subject<boolean>();
                 this.news = this.newsShow.asObservable();
-             
+                
               }
 
 ngOnDestroy() {
@@ -229,8 +229,12 @@ getData(){
         this.pagedItems = this.totalPages.slice(this.pager.startIndex, this.pager.endIndex + 1);
     }
 
-   prepEndpoint(ep){
-      return 'https://movie-master.herokuapp.com/'+ep;
+    prepEndpoint(ep){
+      if(this.isDev){
+        return 'http://localhost:8080/'+ep;
+      } else {
+        return 'https://movie-master.herokuapp.com/'+ep;
+      }
     }
 
 

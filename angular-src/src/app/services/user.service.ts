@@ -11,8 +11,11 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class UserService {
+  isDev:boolean;
 
-  constructor(private http:Http) {}
+  constructor(private http:Http) {
+    this.isDev = false;
+  }
 
 
   updateUser(user){
@@ -51,9 +54,13 @@ export class UserService {
   }
 
   
-    prepEndpoint(ep){
+  prepEndpoint(ep){
+    if(this.isDev){
+      return 'http://localhost:8080/'+ep;
+    } else {
       return 'https://movie-master.herokuapp.com/'+ep;
     }
+  }
   
 
 }
