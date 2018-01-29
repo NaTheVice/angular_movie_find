@@ -62,8 +62,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   movieClicked(id: string, movie){
-    console.log("click receive")
-
     this.selectMovie(movie);
     this.openModal(id);
   }
@@ -76,10 +74,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.favorites.push(movie);
   }
 
-  addMovieToDB(movie){ 
-    this.favorites.push(movie);
-  }
-
   getNewestMovies(){
     this.movieService.getNewestMovies();
   }
@@ -89,20 +83,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   sendMovieToDb(movie){
-    movie.watched = false;
-    movie.addedAt = new Date();
-    console.log('setMovie with json: '+ movie)
-    this.movieService.addMovieToDb(movie).takeWhile(() => this.alive).subscribe(data => {
-      this.movieService.getFavorites();
-      if(data){
-        console.log('Movie added to DB successfuly for user: ' + data.name);
-        
-      } else {
-        console.log('Movie not added to DB: error' )
-      }
-    });
-    this.movieService.getFavorites();
-
+    this.movieService.sendMovieToDb(movie);
   }
 
   saveFavoritesAsText(){

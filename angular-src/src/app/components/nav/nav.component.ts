@@ -59,7 +59,7 @@ loggedIn: boolean;
     gotoHashtag(fragment: string) {
             const element = document.querySelector("#" + fragment);
             if (element) element.scrollIntoView();
-        }
+    }
 
    onLogoutClick(){
     this.authService.logout();

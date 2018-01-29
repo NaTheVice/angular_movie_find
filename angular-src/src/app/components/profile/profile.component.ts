@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnInit} from '@angular/core';
+import { Component, ElementRef, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {genres} from './genresModel';
@@ -22,6 +22,7 @@ export let bestRated = [];
 
 
 export class ProfileComponent implements OnInit,OnDestroy {
+  
   public latitude: number;
   public longitude: number;
   public searchControl: FormControl;
@@ -45,6 +46,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   watched: number = 0;
   watchedpercent: string;
   ratingpercent: string;
+  editmode;
   
 
   
@@ -55,42 +57,33 @@ export class ProfileComponent implements OnInit,OnDestroy {
               private movieService: MovieService,
               private userService: UserService,
               private authService: AuthService,
-              private mapsAPILoader: MapsAPILoader,
-              private ngZone: NgZone) { 
-
-                
-                this.subscription = this.movieService.dbList.subscribe(movies => {
-                  this.movies = movies;
-                  this.movieCount = this.movies.length;
-                  this.initializeMovieData();
-                });
-                
-                if(!this.user){
-                  this.authService.getProfile().takeWhile(() => this.alive).subscribe(profile => {
-                    this.firstChar = profile.user.name.charAt(0).toUpperCase();
-                    this.user = profile.user;
-                  });
-                }
-                else{
-                  this.firstChar = this.user.name.charAt(0).toUpperCase();
-                }
-              
-            }
+              private mapsAPILoader: MapsAPILoader
+              ){ 
+                this.setUserData();
+              }
 
   ngOnDestroy() {
-  this.subscription.unsubscribe();
   this.alive = false;
   }
 
   ngOnInit() {
-     
-    this.setCurrentPosition();
-  
+    this.setCurrentPosition(); 
+    
     
   }
 
+  setUserData(): void {
+    
+      this.authService.getProfile().takeWhile(() => this.alive).subscribe(profile => {
+        this.firstChar = profile.user.name.charAt(0).toUpperCase();
+        this.user = profile.user;
+        this.movies = profile.user.movies;
+        this.movieCount = profile.user.movies.length;
+        this.initializeMovieData();
+      });
+    
+  }
   
-
   initializeMovieData(){
     this.countWatched(this.movies);
     this.countGenre(this.movies);
@@ -105,8 +98,8 @@ export class ProfileComponent implements OnInit,OnDestroy {
     this.progress();
   }
 
-   makeEditable(username){
-   
+  makeEditable(username){
+    this.editmode = true;
     var inputs = document.getElementsByClassName("user");
     for (var i = inputs.length, n = 0; n < i; n++) {
       if(inputs[n].hasAttribute("disabled")){
@@ -144,6 +137,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
           this.userService.updateUser(userToUpdate).takeWhile(() => this.alive).subscribe(data => {
             if(data){
               console.log('update user success')
+              this.editmode = false;
               
             } else {
               console.log('update user error')
@@ -366,5 +360,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
     }
     
   }
+
+
 
 }

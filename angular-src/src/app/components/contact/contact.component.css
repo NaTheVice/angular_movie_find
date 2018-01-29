@@ -1,0 +1,35 @@
+
+#contactpage{
+    margin-top: 30px;
+}
+.type-search{
+  list-style: none;
+}
+.lefty{
+  float:left;
+}
+
+.lefty ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.lefty li {
+  float: left;
+
+
+}
+.centered{
+  margin-left: auto;
+  margin-right: auto;
+}
+.lefty li a {
+  display: block;
+
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+}

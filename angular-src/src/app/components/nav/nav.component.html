@@ -19,8 +19,8 @@
                         <li class="active"><a  [routerLink]="['/']" (click)="gotoHashtag('home-slider')" fragment="home-slider">HOME</a></li>
                         <li><a  [routerLink]="['/']" (click)="gotoHashtag('searchpage')" fragment="searchpage" >SEARCH</a></li>
                         <li *ngIf="loggedIn"><a  [routerLink]="['/profile']">PROFILE</a></li>
-                        <li *ngIf="loggedIn"><a  [routerLink]="['/']" (click)="gotoHashtag('favpage')" fragment="favpage">MY MOVIES</a></li>
-                        <li><a  [routerLink]="['/']" (click)="gotoHashtag('contact')" fragment="contact" >CONTACT</a></li>
+                        <li *ngIf="loggedIn"><a  [routerLink]="['/mymovies']">MY MOVIES</a></li>
+                        <li><a  [routerLink]="['/contact']">CONTACT</a></li>
                         <li *ngIf="!loggedIn"><a [routerLink]="['/login']">LOGIN</a></li>
                         <li *ngIf="!loggedIn"><a [routerLink]="['/register']">REGISTER</a></li>
                         <li *ngIf="loggedIn"><a (click)="onLogoutClick()" >LOGOUT</a></li>

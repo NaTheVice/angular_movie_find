@@ -70,7 +70,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('profile onInit')
+    
     this.authService.getProfile().takeWhile(() => this.alive).subscribe(profile => {
       this.currentUser = profile.user;
       this.flashMessage.show('Welcome Root', {

@@ -35,7 +35,9 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 import {ChartsModule} from 'ng2-charts';
 import { AgmCoreModule } from "@agm/core";
-import {ArraySortPipe} from './pipes/ArraySortPipe'
+import {ArraySortPipe} from './pipes/ArraySortPipe';
+import { MymoviesComponent } from './components/mymovies/mymovies.component';
+import { ContactComponent } from './components/contact/contact.component'
 
 
 const appRoutes: Routes =  [
@@ -45,7 +47,9 @@ const appRoutes: Routes =  [
   {path:'login', component: LoginComponent},
   {path:'searchpage', component: HomeComponent},
   {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
-  {path:'profile', component: ProfileComponent}
+  {path:'profile', component: ProfileComponent},
+  {path:'mymovies', component: MymoviesComponent},
+  {path:'contact', component: ContactComponent}
 ]
 
 @NgModule({
@@ -64,7 +68,9 @@ const appRoutes: Routes =  [
     FavoritesComponent,
     DoughnutChartComponent,
     LineChartComponent,
-    ArraySortPipe
+    ArraySortPipe,
+    MymoviesComponent,
+    ContactComponent
    
   ],
   imports: [

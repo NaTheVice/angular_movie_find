@@ -39,26 +39,26 @@ export class MovieService implements OnDestroy {
               private pagerService: PagerService,
               private router:Router) 
               {
-               console.log('copy movies länge in construct: '+this.moviesCopy.length)
+                
                 this.dbList = new BehaviorSubject<Array<any>>([]);
                 this.newsShow = new Subject<boolean>();
                 this.news = this.newsShow.asObservable();
-
-                this.getFavorites();
-                
+             
               }
 
- ngOnDestroy() {
-  
+ngOnDestroy() {
   this.alive = false;
-  }
+}
 
 ngOnInit(){
+    if(this.AuthService.loggedIn()){
     this.getFavorites();
+    }
     this.moviesCopy = this.movies;
 }
 
 getData(){
+    console.log("get data in movieservice call");
     this.totalPages.length =0;
     this.tmdbSearch.getData(this.searchstring).takeWhile(() => this.alive).subscribe(
                 (data)=> {
@@ -69,8 +69,7 @@ getData(){
                     this.setPage(1);
                     //this.router.navigate(['home']);
                 })
-
-                
+              
   }
 
   getMoreData(page){
@@ -113,8 +112,29 @@ getData(){
                  })
   }
 
+  sendMovieToDb(movie){
+    var movie_exist = this.favorites.some(item => item.id == movie.id);
+    if(movie_exist){
+      confirm("allready in your database");
+    }
+    else{
+    movie.watched = false;
+    movie.addedAt = new Date();
+    this.addMovieToDb(movie).takeWhile(() => this.alive).subscribe(data => {
+      this.getFavorites();
+      if(data){
+        console.log('Movie added to DB successfuly for user: ' + data.name);
+        
+      } else {
+        console.log('Movie not added to DB: error' )
+      }
+    });
+    this.getFavorites();
+  }
+  }
+
   addMovieToDb(movie){
-    console.log('setMovie' +JSON.stringify(movie));
+  
     let headers = new Headers();
     const token = localStorage.getItem('id_token');
     headers.append('Authorization', token);
@@ -122,6 +142,7 @@ getData(){
     let ep = this.prepEndpoint('users/movieadd');
     return this.HttpService.post(ep,movie,{headers: headers})
       .map(res => res.json());
+    
   }
 
   deleteMovieFromDb(id){
@@ -153,7 +174,7 @@ getData(){
     
     console.log('get userFavorites')
 
-    if(this.AuthService.loggedIn()){
+
       let headers = new Headers();
       const token = localStorage.getItem('id_token');
       headers.append('Authorization', token);
@@ -162,10 +183,10 @@ getData(){
       this.HttpService.get(ep,{headers: headers})
       .map(res => {return res.json()})
       .takeWhile(() => this.alive)
-      .subscribe(movies => {this.dbList.next(movies)},
+      .subscribe(movies => {this.dbList.next(movies); this.favorites = movies},
       (err => console.error("load movieslist error"))
       );
-    }
+    
    
   }
 
