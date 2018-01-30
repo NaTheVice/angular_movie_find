@@ -83,8 +83,13 @@ export class AuthService {
   }
 
   prepEndpoint(ep){
+<<<<<<< HEAD
     if(!environment.production){
       return ep;
+=======
+    if(this.isDev){
+      return 'http://localhost:8080/'+ep;
+>>>>>>> 6135517c497eefdf5ce9c2bce33f9401bb8a851b
     } else {
       return 'https://movie-master.herokuapp.com/'+ep;
     }

@@ -17,7 +17,7 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class MovieService implements OnDestroy {
-
+    isDev:boolean;
     searchstring = '';
     newsShow;
     news;
@@ -40,11 +40,11 @@ export class MovieService implements OnDestroy {
               private pagerService: PagerService,
               private router:Router) 
               {
-                
+                this.isDev = false;
                 this.dbList = new BehaviorSubject<Array<any>>([]);
                 this.newsShow = new Subject<boolean>();
                 this.news = this.newsShow.asObservable();
-             
+                
               }
 
 ngOnDestroy() {
@@ -231,8 +231,13 @@ getData(){
     }
 
     prepEndpoint(ep){
+<<<<<<< HEAD
       if(!environment.production){
         return ep;
+=======
+      if(this.isDev){
+        return 'http://localhost:8080/'+ep;
+>>>>>>> 6135517c497eefdf5ce9c2bce33f9401bb8a851b
       } else {
         return 'https://movie-master.herokuapp.com/'+ep;
       }
