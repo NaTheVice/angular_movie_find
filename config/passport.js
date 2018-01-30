@@ -9,7 +9,7 @@ const config = require('../config/database');
 //wenn erfolgreich --> user aus payload wird benutzt um die ID zum mit db abzugleichen --> user or error out 
 module.exports = function(passport){
   let opts = {};
-  opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
+  opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
   opts.secretOrKey = config.secret;
   
   passport.use(new JwtStrategy(opts, (jwt_payload, done) => {

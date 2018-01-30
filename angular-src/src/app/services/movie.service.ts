@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import {tokenNotExpired} from 'angular2-jwt';
 import { ISubscription } from "rxjs/Subscription";
 import "rxjs/add/operator/takeWhile";
+import { environment } from '../../environments/environment';
 
 
 
@@ -229,8 +230,12 @@ getData(){
         this.pagedItems = this.totalPages.slice(this.pager.startIndex, this.pager.endIndex + 1);
     }
 
-   prepEndpoint(ep){
-      return 'https://movie-master.herokuapp.com/'+ep;
+    prepEndpoint(ep){
+      if(!environment.production){
+        return ep;
+      } else {
+        return 'https://movie-master.herokuapp.com/'+ep;
+      }
     }
 
 

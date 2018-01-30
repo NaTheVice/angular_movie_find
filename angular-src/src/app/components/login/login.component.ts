@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit, OnDestroy{
         this.authService.storeUserData(data.token, data.user);
         this.authService.setUserSession(true);
         if(data.user.username == 'root'){
+          console.log("navigate to dashboard while root")
           this.router.navigate(['dashboard']);
         }
         if(data.user.username != 'root'){

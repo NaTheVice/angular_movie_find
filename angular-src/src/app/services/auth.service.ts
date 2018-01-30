@@ -11,19 +11,20 @@ import { Observer } from 'rxjs/Observer';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
   authToken: any;
   user: any;
-  isDev:boolean;
+  
   isLoggedIn = new BehaviorSubject<boolean>(false);
   userSession = this.isLoggedIn.asObservable();
   //xx: Observable<boolean> = Observable.of(true);
 
   constructor(private http:Http) {
     this.isLoggedIn.next(this.loggedIn());
-    this.isDev = false; // Change to false before deployment
+    
   }
 
   ngOninit(){
@@ -47,7 +48,7 @@ export class AuthService {
   }
 
   getProfile(){
-    console.log('get profile')
+    console.log('get profile in authService')
     let headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
@@ -82,7 +83,7 @@ export class AuthService {
   }
 
   prepEndpoint(ep){
-    if(this.isDev){
+    if(!environment.production){
       return ep;
     } else {
       return 'https://movie-master.herokuapp.com/'+ep;

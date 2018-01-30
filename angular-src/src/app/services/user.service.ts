@@ -7,6 +7,7 @@ import 'rxjs/add/operator/catch';
 import { Subject,  } from 'rxjs/Subject';
 import { BehaviorSubject,  } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
+import { environment } from '../../environments/environment';
 
 
 @Injectable()
@@ -39,7 +40,7 @@ export class UserService {
   }
 
   getUserList(){
-    console.log('get userlist')
+    console.log('get userlist in UserService')
     let headers = new Headers();
     const token = localStorage.getItem('id_token');
     headers.append('Authorization', token);
@@ -50,10 +51,13 @@ export class UserService {
       
   }
 
-  
-    prepEndpoint(ep){
+  prepEndpoint(ep){
+    if(!environment.production){
+      return ep;
+    } else {
       return 'https://movie-master.herokuapp.com/'+ep;
     }
+  }
   
 
 }
