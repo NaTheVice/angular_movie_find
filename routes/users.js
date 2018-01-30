@@ -38,13 +38,15 @@ router.post('/authenticate', (req, res, next) => {
     User.comparePassword(password, user.password, (err, isMatch) => {
       if(err) throw err;
       if(isMatch){
+        console.log("user" +JSON.stringify(user.toJSON()))
         const user_min = {
-          id: user._id,
+          _id: user._id,
           name: user.name,
           username: user.username,
           email: user.email,
           password: user.password
         }
+        console.log("user_min" + JSON.stringify(user_min))
         const token = jwt.sign(user_min, config.secret, {
           expiresIn: 604800 // 1 week
         });
