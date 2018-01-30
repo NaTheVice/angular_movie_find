@@ -35,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Body Parser Middleware (benötigt um req-body auslesen zu können)
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); 
 
 // Passport Middleware (benötigt um requests zu authentifizieren zu können)
 app.use(passport.initialize());
