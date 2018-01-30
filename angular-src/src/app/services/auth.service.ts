@@ -43,6 +43,7 @@ export class AuthService {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     let ep = this.prepEndpoint('users/authenticate');
+    console.log("user to authenticate: " +user)
     return this.http.post(ep, user,{headers: headers})
       .map(res => res.json());
   }

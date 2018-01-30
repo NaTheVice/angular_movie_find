@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit, OnDestroy{
           this.router.navigate(['dashboard']);
         }
         if(data.user.username != 'root'){
+          console.log("navigate to profile while not root")
           this.router.navigate(['profile']);
         }
       } else {
