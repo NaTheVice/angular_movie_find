@@ -20,3 +20,10 @@ Run app
 ```sh
 $ npm start
 ```
+
+### Try on Heroku
+
+https://movie-master.herokuapp.com/
+
+Login as: root pw: root 
+for using the root dashboard
